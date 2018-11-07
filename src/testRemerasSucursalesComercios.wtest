@@ -1,0 +1,46 @@
+import remeras.*
+import sucursales.*
+import comercios.*
+
+describe "Tests del Parcial" {
+	//dibujos
+		const	dibujoStarWars	=	new DibujoSublimado (alto=20, ancho=20, derechoAutor=100, tieneConvenio=true)
+	//remeras
+		const	remeraLisa01	=	new	RemeraLisa		(talle=40, color=blanco								 	)
+		const	remeraBordada01	=	new	Bordada	  		(talle=38, color=negro, coloresBordado=2				)
+		const	remeraCDibujo01	=	new	Sublimada 		(talle=35, color=negro,  dibujoSublimado=dibujoStarWars ) 	
+	//pedidos
+		const	pedido01		=	new	Pedido			(modeloRemera=remeraLisa01,    cantidadRemeras=5		)
+		const	pedido02		=	new Pedido			(modeloRemera=remeraBordada01, cantidadRemeras=10		)
+		const	pedido03		=	new Pedido			(modeloRemera=remeraCDibujo01, cantidadRemeras=20		)
+	//sucursales
+		const	sucursal01		=	new Sucursal		(cantidadMinimaRemeras=4								)
+		const	sucursal02		=	new Sucursal		(cantidadMinimaRemeras=10								)
+		const	sucursal03		=	new Sucursal		(cantidadMinimaRemeras=15								)
+	//comercios
+		const	comercio01		=	new Comercio		(sucursales=#{sucursal01, sucursal02, sucursal03}								)
+	
+	fixture {
+		sucursal01.registrarPedido(pedido01)
+		sucursal02.registrarPedido(pedido02)
+		sucursal03.registrarPedido(pedido03)
+	}
+
+	test "C.1 - Sucursal01 registra el pedido01" {
+		assert.equals(1, sucursal01.pedidos().size())
+	}
+	
+	test "C.2 - Total facturado por comercio01" {
+		assert.equals(7420, comercio01.totalFacturado()) //360 porque se aplico el descuento ya que supera la cantidad minima exigida por sucursal.
+	}
+	
+	test "C.3 - Total facturado por sucursal01" {
+		assert.equals(360, sucursal01.totalFacturado())
+	}
+	
+	test "C.4 - Cuantos pedidos se han realizado de unColor=negro en sucursal" {
+		//
+		assert.that(true)
+	}	
+		
+}
