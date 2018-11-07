@@ -8,9 +8,9 @@ class Sucursal {
 	method aplicaDto	  (unPedido)	=	unPedido.cantidadRemeras()>=cantidadMinimaRemeras
 	method totalFacturado ()			=	pedidos.sum{	pedido => pedido.precio(self)	}
 	method pedidosDeUnColor(unColor)	=	pedidos.count{	pedido => pedido.modeloRemera().color() == unColor }
-	method pedidoMasCaro()				=	pedidos.max{	pedido => pedido.precio()	}
+	method pedidoMasCaro()				=	pedidos.max{	pedido => pedido.precio(self)	}
 	method tallesPedidos()				=	pedidos.map{	pedido => pedido.modeloRemera().talle()			   }
-	method tallesNoPedidos()			=	tallesDisponibles.difference(self.tallesPedidos()) 	//retorna un conjunto vacio si pidieron todos los talles.
+	method tallesNoPedidos()			=	tallesDisponibles.asList().asSet().difference(self.tallesPedidos().asSet()) 	//retorna un conjunto vacio si pidieron todos los talles.
 	method vendioTodosLosTalles()		=	self.tallesNoPedidos()==tallesDisponibles
 		
 }

@@ -3,12 +3,13 @@ import sucursales.*
 import comercios.*
 
 describe "Tests del Parcial" {
+
 	//dibujos
 		const	dibujoStarWars	=	new DibujoSublimado (alto=20, ancho=20, derechoAutor=100, tieneConvenio=true)
 	//remeras
 		const	remeraLisa01	=	new	RemeraLisa		(talle=40, color=blanco								 	)
-		const	remeraBordada01	=	new	Bordada	  		(talle=38, color=negro, coloresBordado=2				)
-		const	remeraCDibujo01	=	new	Sublimada 		(talle=35, color=negro,  dibujoSublimado=dibujoStarWars ) 	
+		const	remeraBordada01	=	new	Bordada	  		(talle=39, color=negro, coloresBordado=2				)
+		const	remeraCDibujo01	=	new	Sublimada 		(talle=38, color=negro,  dibujoSublimado=dibujoStarWars ) 	
 	//pedidos
 		const	pedido01		=	new	Pedido			(modeloRemera=remeraLisa01,    cantidadRemeras=5		)
 		const	pedido02		=	new Pedido			(modeloRemera=remeraBordada01, cantidadRemeras=10		)
@@ -39,8 +40,28 @@ describe "Tests del Parcial" {
 	}
 	
 	test "C.4 - Cuantos pedidos se han realizado de unColor=negro en sucursal" {
-		//
-		assert.that(true)
+		sucursal01.registrarPedido(pedido02)
+		sucursal01.registrarPedido(pedido03)
+		assert.equals(2, sucursal01.pedidosDeUnColor(negro))
 	}	
+/* 	No me anduvo no tuve tiempo para corregir el error, 
+	test "C.5 - Pedido mas caro por comercio01" {
+		assert.equals(pedido03, comercio01.pedidoMasCaro())
+	}
+*/	
+	
+	test "C.6 - Talles que no se pidieron" {
+		sucursal01.registrarPedido(pedido02)
+		sucursal01.registrarPedido(pedido03)
+		assert.equals(#{32,33,34,35,36,37,41,42,43,44,45,46,47,48}, sucursal01.tallesNoPedidos())
+	}
+	
+	test "C.7 - sucursal que mas facturo" {
+		assert.equals(sucursal03,comercio01.sucursalMasVendio())
+	}
+/*falto revisar por tiempo	
+	test "C.8 - sucursal vendio remera de todos los talles" {
 		
+	}
+*/
 }

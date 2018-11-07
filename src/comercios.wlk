@@ -6,4 +6,5 @@ class Comercio {
 	method totalFacturadoX(unaSucursal)		=	sucursales.find{ sucursal => sucursal==unaSucursal	}.totalFacturado() //Por sucursal
 	method sucursalMasVendio()				=	sucursales.max{	 sucursal => sucursal.totalFacturado()	}
 	method sucursalVendioTodosLosTalles()	=	sucursales.filter{	sucursal => sucursal.vendioTodosLosTalles()	}	
+	method pedidoMasCaro()					=	sucursales.filter{	sucursal => sucursal.pedidoMasCaro()	}
 }
